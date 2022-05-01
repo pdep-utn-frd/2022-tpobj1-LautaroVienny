@@ -1,21 +1,17 @@
 import wollok.game.*
     
-  const velocidad = 220
-  const velocidad2 = 275
-  
+const velocidad = 250
+
 object juego{
 
 	method configurar(){
 		game.width(12)
 		game.height(8)
 		game.title("Dino Game")
-		game.boardGround("fondo.jpg")
 		game.addVisual(suelo)
 		game.addVisual(cactus)
 		game.addVisual(dino)
 		game.addVisual(reloj)
-		game.addVisual(puntuacion)
-		game.addVisual(bomba)
 	
 		keyboard.space().onPressDo{ self.jugar()}
 		
@@ -27,7 +23,6 @@ object juego{
 		dino.iniciar()
 		reloj.iniciar()
 		cactus.iniciar()
-		bomba.iniciar()
 	}
 	
 	method jugar(){
@@ -45,56 +40,15 @@ object juego{
 		cactus.detener()
 		reloj.detener()
 		dino.morir()
-		bomba.detener()
 	}
 	
 }
 
 object gameOver {
-	method position() = game.at(5,game.height()-4)
-	method text() = "¡HAS MUERTO!"
-	method textColor() = paleta.negro()
+	method position() = game.center()
+	method text() = "GAME OVER"
 	
-}
 
-
-object paleta {
-	const property negro = "000000"	
-	
-}
-
-
-object puntuacion {
-	
-	method text() = "PUNTAJE ACTUAL:"
-	method position() = game.at(1,game.height()-1)
-	method textColor() = paleta.negro()
-}
-
-object bomba {
-	
-	const posicionInicial = game.at(game.width()-2,suelo.position().y())
-	var position = posicionInicial
-	
-	method image() = "bomba1.png"
-	method position() = position
-	
-	method iniciar(){
-		position = posicionInicial
-		game.onTick(velocidad,"moverBomba",{self.mover()})
-	}
-	
-	method mover(){
-		position = position.left(1)
-		if (position.x() == -1)
-			position = posicionInicial
-	}
-	method chocar(){
-		juego.terminar()
-	}
-    method detener(){
-		game.removeTickEvent("moverBomba")
-	}
 }
 
 object reloj {
@@ -102,8 +56,7 @@ object reloj {
 	var tiempo = 0
 	
 	method text() = tiempo.toString()
-	method position() = game.at(3, game.height()-1)
-	method textColor() = paleta.negro()
+	method position() = game.at(1, game.height()-1)
 	
 	method pasarTiempo() {
 		tiempo = tiempo +1
@@ -127,7 +80,7 @@ object cactus {
 	
 	method iniciar(){
 		position = posicionInicial
-		game.onTick(velocidad2,"moverCactus",{self.mover()})
+		game.onTick(velocidad,"moverCactus",{self.mover()})
 	}
 	
 	method mover(){
@@ -156,7 +109,7 @@ object dino {
 	var vivo = true
 	var position = game.at(1,suelo.position().y())
 	
-	method image() = "dinotanque.png"
+	method image() = "dino.png"
 	method position() = position
 	
 	method saltar(){
