@@ -1,6 +1,6 @@
 import wollok.game.*
     
-  const velocidad = 220
+  const velocidad = 221
   const velocidad2 = 275
   
 object juego{
@@ -9,7 +9,7 @@ object juego{
 		game.width(12)
 		game.height(8)
 		game.title("Dino Game")
-		game.boardGround("fondo1.jpg")
+		game.boardGround("fondo.jpg")
 		game.addVisual(suelo)
 		game.addVisual(cactus)
 		game.addVisual(dino)
@@ -76,7 +76,7 @@ object bomba {
 	const posicionInicial = game.at(game.width()-2,suelo.position().y())
 	var position = posicionInicial
 	
-	method image() = "bomba1.png"
+	method image() = "bomba.png"
 	method position() = position
 	
 	method iniciar(){
@@ -156,7 +156,7 @@ object dino {
 	var vivo = true
 	var position = game.at(1,suelo.position().y())
 	
-	method image() = "dinotanque.png"
+	method image() = "dinonuevo.png"
 	method position() = position
 	
 	method saltar(){
@@ -174,7 +174,7 @@ object dino {
 		position = position.down(1)
 	}
 	method morir(){
-		game.say(self,"¡Auch!")
+		game.say(self,"¡BOOM!")
 		vivo = false
 	}
 	method iniciar() {
