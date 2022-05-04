@@ -1,7 +1,7 @@
 import wollok.game.*
     
-  const velocidad = 220
-  const velocidad2 = 275
+  const velocidad = 223            //Velocidad de la bomba
+  const velocidad2 = 275           //Velocidad del cactus
   
 object juego{
 
@@ -9,7 +9,7 @@ object juego{
 		game.width(12)
 		game.height(8)
 		game.title("Dino Game")
-		game.boardGround("fondodino.jpg")
+		game.boardGround("fondojuego.jpg")
 		game.addVisual(suelo)
 		game.addVisual(cactus)
 		game.addVisual(dino)
@@ -23,7 +23,7 @@ object juego{
 		
 	} 
 	
-	method    iniciar(){
+	method iniciar(){
 		dino.iniciar()
 		reloj.iniciar()
 		cactus.iniciar()
@@ -76,7 +76,7 @@ object bomba {
 	const posicionInicial = game.at(game.width()-2,suelo.position().y())
 	var position = posicionInicial
 	
-	method image() = "obstaculo.png"
+	method image() = "bomba.png"
 	method position() = position
 	
 	method iniciar(){
@@ -156,7 +156,7 @@ object dino {
 	var vivo = true
 	var position = game.at(1,suelo.position().y())
 	
-	method image() = "dino1.png"
+	method image() = "dinotanque.png"
 	method position() = position
 	
 	method saltar(){
